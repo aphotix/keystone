@@ -7,10 +7,10 @@ module.exports = function bindIPRestrictions (keystone, app) {
 	if (keystone.get('file limit')) {
 		bodyParserParams.limit = keystone.get('file limit');
 	}
-	app.use(bodyParser.json(bodyParserParams));
+	app.use(/\/((?!attachments\/upload).)*/, bodyParser.json(bodyParserParams));
 	bodyParserParams.extended = true;
-	app.use(bodyParser.urlencoded(bodyParserParams));
-	app.use(multer({
+	app.use(/\/((?!attachments\/upload).)*/, bodyParser.urlencoded(bodyParserParams));
+	app.use(/\/((?!attachments\/upload).)*/, multer({
 		includeEmptyFields: true,
 	}));
 };
