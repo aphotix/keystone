@@ -12,5 +12,5 @@ module.exports = function bindIPRestrictions (keystone, app) {
 	app.use(/\/((?!attachments\/upload).)*/, bodyParser.urlencoded(bodyParserParams));
 	app.use(/\/((?!attachments\/upload).)*/, multer({
 		includeEmptyFields: true,
-	}));
+	}).any());
 };
